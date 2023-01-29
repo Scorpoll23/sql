@@ -1,0 +1,72 @@
+// Create a Branches collection (if not already there), clears collection to re-run all code//
+
+db.createCollection("Branches");
+db.Branches.remove({})
+
+// Inserting data for branches, each branch has an embedded table for staff and for properties //
+
+db.Branches.insert(
+	{ _id: "001",
+	branch_of_agent: "Michael and Eagle",
+	staff: //embedded staff memebers
+	[{id:"01", name:"James John", DOB: ISODate("1998-02-23"), Gender:"M", Contact:"07732711621", Address:"1 City Street Newcastle"},
+	{id:"02", name:"John Jameson", DOB: ISODate("1993-05-13"), Gender:"M", Contact:"07332711612", Address:"2 City Street Newcastle"},
+	{id:"02", name:"Craig Thomas", DOB: ISODate("1993-08-14"), Gender:"M", Contact:"07332711612", Address:"3 City Street Newcastle"}],
+	properties: //embedded properties
+	[{propertyID: "001", Description: "Nice place", Available: "Y", Type: "detached", Bedrooms: "3", DateListed: ISODate("2021-12-08"), Address: "11 Milk Road Newcastle"},
+	{propertyID: "002", Description: "Good place", Available: "N", Type: "terraced", Bedrooms: "2", DateListed: ISODate("2021-12-07"), Address: "12 Cream Road Newcastle"},
+	{propertyID: "003", Description: "Lovely place", Available: "Y", Type: "demi-detached", Bedrooms: "4", DateListed: ISODate("2021-12-06"), Address: "13 Egg Road Newcastle"}],
+	city: "Newcastle",
+	Street: "22 Grey Street"});
+
+db.Branches.insert(
+	{ _id: "002",
+	branch_of_agent: "Johnsons Houses",
+	staff: //embedded staff memebers
+	[{id:"04", name:"Riely Jacob", DOB: ISODate("1998-02-23"), Gender:"F", Contact:"07733311621", Address:"4 City Street Newcastle"},
+	{id:"05", name:"Lana Curtis", DOB: ISODate("1993-05-13"), Gender:"F", Contact:"07322711612", Address:"5 City Street Newcastle"},
+	{id:"06", name:"Danny Elfman", DOB: ISODate("1993-08-14"), Gender:"F", Contact:"07332441612", Address:"6 City Street Newcastle"}],
+	properties: //embedded properties
+	[{propertyID: "004", Description: "Nice place", Available: "Y", Type: "detached", Bedrooms: "3", DateListed: ISODate("2021-12-08"), Address: "13 Milk Road Newcastle"},
+	{propertyID: "005", Description: "Good place", Available: "N", Type: "terraced", Bedrooms: "2", DateListed: ISODate("2021-12-07"), Address: "9 Cream Road Newcastle"},
+	{propertyID: "006", Description: "Lovely place", Available: "Y", Type: "semi-detached", Bedrooms: "4", DateListed: ISODate("2021-12-06"), Address: "47 Egg Road Newcastle"}],
+	city: "Newcastle",
+	Street: "12 Apple Street"});
+
+db.Branches.insert(
+	{ _id: "003",
+	branch_of_agent: "Lettings it be",
+	staff: //embedded staff memebers
+	[{id:"07", name:"Alana Rocket", DOB: ISODate("1998-02-23"), Gender:"F", Contact:"07733311121", Address:"7 City Street Newcastle"},
+	{id:"08", name:"Mike Think", DOB: ISODate("1994-05-13"), Gender:"M", Contact:"07112711612", Address:"8 City Street Newcastle"},
+	{id:"09", name:"Ruby Stains", DOB: ISODate("1992-08-14"), Gender:"F", Contact:"07332881612", Address:"9 City Street Newcastle"}],
+	properties: //embedded properties
+	[{propertyID: "007", Description: "Nice place", Available: "Y", Type: "detached", Bedrooms: "3", DateListed: ISODate("2021-12-08"), Address: "88 Milk Road Newcastle"},
+	{propertyID: "008", Description: "Good place", Available: "N", Type: "terraced", Bedrooms: "2", DateListed: ISODate("2021-12-07"), Address: "99 Cream Road Newcastle"},
+	{propertyID: "009", Description: "Lovely place", Available: "Y", Type: "semi-detached", Bedrooms: "4", DateListed: ISODate("2021-12-06"), Address: "44 Egg Road Newcastle"}],
+	city: "Gateshead",
+	Street: "33 Ancient Terrace"});
+
+db.Branches.insert(
+	{ _id: "004 ",
+	branch_of_agent: "Good houses",
+	staff: //embedded staff memebers
+	[{id:"10", name:"Tugce Dogramaci", DOB: ISODate("1998-05-24"), Gender:"F", Contact:"07133311121", Address:"10 City Street Newcastle"},
+	{id:"11", name:"Stuart Ashens", DOB: ISODate("1975-05-13"), Gender:"M", Contact:"07112441612", Address:"11 City Street Newcastle"},
+	{id:"12", name:"Ruby Stains", DOB: ISODate("1992-08-14"), Gender:"F", Contact:"07339981612", Address:"12 City Street Newcastle"}],
+	properties: //embedded properties
+	[{propertyID: "010", Description: "Nice place", Available: "Y", Type: "detached", Bedrooms: "3", DateListed: ISODate("2021-12-08"), Address: "7 Milk Road Newcastle"},
+	{propertyID: "011", Description: "Good place", Available: "N", Type: "terraced", Bedrooms: "2", DateListed: ISODate("2021-12-07"), Address: "2 Cream Road Newcastle"},
+	{propertyID: "012", Description: "Lovely place", Available: "Y", Type: "semi-detached", Bedrooms: "4", DateListed: ISODate("2021-12-06"), Address: "3 Egg Road Newcastle"}],
+	city: "Sunderland",
+	Street: "07 Case Street"});
+
+// Queries //
+
+// Find all properties with 3 or more bedrooms //
+
+db.Branches.find({"properties": { $gte: {Bedrooms: "3"}}}, {branch_of_agent: 1, city: 1, "properties.Address": 1, "properties.Bedrooms": 1})
+
+// find all employees of 'good houses' who are female //
+
+db.Branches.find({branch_of_agent: "Good houses"},  {"staff": { $elemMatch: {Gender: "F"}}})

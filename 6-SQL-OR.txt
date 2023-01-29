@@ -1,0 +1,244 @@
+REM Dropping all types and tables so script can be re-run without interferance
+
+DROP TYPE Staff_type force;
+DROP TYPE staff_ref_t;
+DROP TYPE Staff_set_t;
+DROP TYPE Property_type force;
+DROP TYPE Property_ref_t;
+DROP TYPE Property_set_t;
+DROP TYPE branch_type;
+DROP TABLE Branches;
+DROP TABLE Properties_tab;
+DROP TABLE Staff_tab force;
+
+
+REM creating type for staff
+create type Staff_type as object(
+	ID Char(2), 
+	Name Varchar(30),
+	DOB Date, 
+	Gender Char(1),
+	Contact Varchar(30),
+	City Varchar(15),
+	Street Varchar(30)
+);
+/
+
+REM creating a type which holds REF to object of type staff
+create or replace type Staff_ref_t as object (
+	staffRef REF staff_type
+)
+/
+
+REM creating table to hold objects of type staff reference 
+Create or replace Type Staff_set_t as Table of Staff_ref_t
+/
+
+REM creating type for properties 
+create type Property_type as object(
+        PropertyID Char(3),
+	Description Varchar(140),
+	Available Char(1),
+	Type Varchar(13),
+	Accommodation_details Varchar(140),
+	Number_of_bedrooms Number(2,0),
+	Date_listed Date,
+	City Varchar(15),
+	Street Varchar(30)
+);
+/
+
+REM creating a type which holds REF to object of type property
+create or replace type property_ref_t as object (
+	propertyRef REF property_type
+)
+/
+
+REM creating table to hold objects of type property reference 
+Create or replace Type property_set_t as Table of property_ref_t
+/
+
+REM creating local branch object 
+create type Branch_type as object(
+    	branch_code Char(3),
+	manager REF Staff_type,
+	branch_of_agent Varchar(30),
+	City Varchar(15),
+	Street Varchar(30),
+	Contact Varchar(30),
+    	staff        Staff_set_t,
+    	properties   Property_set_t
+);
+/
+
+REM Creating table of branches and naming nested tables
+Create table Branches of Branch_type(Primary Key(branch_code))
+nested table staff store as Staff_member
+nested table properties store as Branch_property
+/
+
+REM Creating table of Staff
+Create table Staff_tab of staff_type(Primary Key(ID))
+/
+
+REM Creating table of Properties
+Create table Properties_tab of property_type(Primary Key(PropertyID))
+/
+
+REM Inserting staff members
+
+insert into staff_tab values('01', 'Dr Akhtar Ali', '11-DEC-1983', 'M', '07522321641', 'Newcastle', '1 City Street');
+insert into staff_tab values('02', 'Prof Martyn Amos', '13-JAN-1976', 'M', 'mamos@northumbria.ac.uk', 'Jesmond', '2 Arch Street');
+insert into staff_tab values('03', 'Jil Bradnum', '14-FEB-1984', 'F', '07763722654', 'Gateshead', '3 Crumpet Street');
+insert into staff_tab values('04', 'Dr Jeremy Ellman', '15-MAR-1942', 'M', '07088863524', 'Sunderland', '4 Grey Street');
+insert into staff_tab values('05', 'Chris Rook', '16-APR-1968', 'M', '07176555231', 'Wallsend', '5 March Street');
+insert into staff_tab values('06', 'Philip Anderson', '11-DEC-1983', 'M', '07522321641', 'Newcastle', '1 City Street');
+insert into staff_tab values('07', 'Ammar Belatreche', '13-JAN-1976', 'M', 'ab@northumbria.ac.uk', 'Jesmond', '2 Arch Street');
+insert into staff_tab values('08', 'Dr Xiaomin Chen', '14-FEB-1984', 'F', '07763722654', 'Gateshead', '3 Crumpet Street');
+insert into staff_tab values('09', 'Gary Elvin', '15-MAR-1942', 'M', '07088863524', 'Sunderland', '4 Grey Street');
+insert into staff_tab values('10', 'Edmond Ho', '16-APR-1968', 'M', '07176555231', 'Wallsend', '5 March Street');
+
+REM Inserting properties
+
+insert into properties_tab values('001', 'Nice place', 'Y', 'Detached', 'No pets', '3', '08-DEC-2021', 'Jesmond', '12 Drury Road');
+insert into properties_tab values('002', 'Good size', 'Y', 'Flat', 'Fully furnished', '2', '07-DEC-2021', 'Newcastle', '13 Drury Road');
+insert into properties_tab values('003', 'High ceilings', 'N', 'semi-Detached', 'No use of garden', '4', '06-DEC-2021', 'Gateshead', '14 Drury Road');
+insert into properties_tab values('004', 'Has garden', 'Y', 'Detached', 'Has private parking', '3', '05-DEC-2021', 'Newcastle', '15 Drury Road');
+insert into properties_tab values('005', 'Spacious', 'Y', 'Terraced', 'No pets', '2', '04-DEC-2021', 'Jesmond', '16 Drury Road');
+insert into properties_tab values('006', 'Needs work', 'N', 'Detached', 'Fully furnished', '5', '03-DEC-2021', 'Sunderland', '17 Drury Road');
+insert into properties_tab values('007', 'Nice place', 'Y', 'Detached', 'No pets', '3', '08-DEC-2021', 'Jesmond', '18 Drury Road');
+insert into properties_tab values('008', 'Good size', 'Y', 'Flat', 'Fully furnished', '2', '07-DEC-2021', 'Newcastle', '19 Drury Road');
+insert into properties_tab values('009', 'High ceilings', 'N', 'semi-Detached', 'No use of garden', '4', '06-DEC-2021', 'Gateshead', '20 Drury Road');
+insert into properties_tab values('010', 'Has garden', 'Y', 'Detached', 'Has private parking', '3', '05-DEC-2021', 'Newcastle', '21 Drury Road');
+insert into properties_tab values('011', 'Spacious', 'Y', 'Terraced', 'No pets', '2', '04-DEC-2021', 'Jesmond', '22 Drury Road');
+insert into properties_tab values('012', 'Needs work', 'N', 'Detached', 'Fully furnished', '5', '03-DEC-2021', 'Sunderland', '23 Drury Road');
+
+REM inserting branches without managers, and with empty nested tables of staff and properties
+
+insert into Branches (branch_code, branch_of_agent, city, street, contact, staff, properties) values ('001', 'michael and eagle', 'newcastle', '12 street road', 'me@lettings.com', staff_set_t(), property_set_t());
+insert into Branches (branch_code, branch_of_agent, city, street, contact, staff, properties) values ('002', 'johnsons houses', 'Jesmond', '13 street road', 'jh@lettings.com', staff_set_t(), property_set_t());
+insert into Branches (branch_code, branch_of_agent, city, street, contact, staff, properties) values ('003', 'lettings it be', 'Gateshead', '14 street road', 'lib@lettings.com', staff_set_t(), property_set_t());
+insert into Branches (branch_code, branch_of_agent, city, street, contact, staff, properties) values ('004', 'good houses inc', 'sunderland', '15 street road', 'ghi@lettings.com', staff_set_t(), property_set_t());
+insert into Branches (branch_code, branch_of_agent, city, street, contact, staff, properties) values ('005', 'house market', 'newcastle', '16 street road', 'hm@lettings.com', staff_set_t(), property_set_t());
+
+REM setting managers for branches 
+
+update branches set branches.manager = (select ref(staff_tab) from staff_tab staff_tab where id = '01') where branches.branch_code = '001';
+update branches set branches.manager = (select ref(staff_tab) from staff_tab staff_tab where id = '02') where branches.branch_code = '002';
+update branches set branches.manager = (select ref(staff_tab) from staff_tab staff_tab where id = '03') where branches.branch_code = '003';
+update branches set branches.manager = (select ref(staff_tab) from staff_tab staff_tab where id = '04') where branches.branch_code = '004';
+update branches set branches.manager = (select ref(staff_tab) from staff_tab staff_tab where id = '05') where branches.branch_code = '005';
+
+REM inserting into nested table of staff refs 
+
+INSERT INTO TABLE (SELECT  B.Staff FROM   Branches B WHERE  B.Branch_code = '001')
+SELECT REF(s) FROM Staff_Tab s WHERE s.id = '01'
+/
+
+INSERT INTO TABLE (SELECT  B.Staff FROM   Branches B WHERE  B.Branch_code = '002')
+SELECT REF(s) FROM Staff_Tab s WHERE s.id = '02'
+/
+
+INSERT INTO TABLE (SELECT  B.Staff FROM   Branches B WHERE  B.Branch_code = '003')
+SELECT REF(s) FROM Staff_Tab s WHERE s.id = '03'
+/
+
+INSERT INTO TABLE (SELECT  B.Staff FROM   Branches B WHERE  B.Branch_code = '004')
+SELECT REF(s) FROM Staff_Tab s WHERE s.id = '04'
+/
+
+INSERT INTO TABLE (SELECT  B.Staff FROM   Branches B WHERE  B.Branch_code = '005')
+SELECT REF(s) FROM Staff_Tab s WHERE s.id = '05'
+/
+
+INSERT INTO TABLE (SELECT  B.Staff FROM   Branches B WHERE  B.Branch_code = '001')
+SELECT REF(s) FROM Staff_Tab s WHERE s.id = '06'
+/
+
+INSERT INTO TABLE (SELECT  B.Staff FROM   Branches B WHERE  B.Branch_code = '002')
+SELECT REF(s) FROM Staff_Tab s WHERE s.id = '07'
+/
+
+INSERT INTO TABLE (SELECT  B.Staff FROM   Branches B WHERE  B.Branch_code = '003')
+SELECT REF(s) FROM Staff_Tab s WHERE s.id = '08'
+/
+
+INSERT INTO TABLE (SELECT  B.Staff FROM   Branches B WHERE  B.Branch_code = '004')
+SELECT REF(s) FROM Staff_Tab s WHERE s.id = '09'
+/
+
+INSERT INTO TABLE (SELECT  B.Staff FROM   Branches B WHERE  B.Branch_code = '005')
+SELECT REF(s) FROM Staff_Tab s WHERE s.id = '010'
+/
+
+
+
+REM Inserting into nested table of property refs 
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '001')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '001'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '002')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '002'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '003')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '003'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '004')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '004'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '005')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '005'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '001')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '006'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '002')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '007'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '003')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '008'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '004')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '009'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '005')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '010'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '004')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '011'
+/
+
+INSERT INTO TABLE (SELECT  B.Properties FROM   Branches B WHERE  B.Branch_code = '005')
+SELECT REF(s) FROM Properties_Tab s WHERE s.propertyid = '012'
+/
+
+
+REM queries 
+
+REM Get all properties with 3 or more bedrooms in Jesmond
+
+Select B.Branch_of_agent, P.propertyRef.number_of_bedrooms, P.propertyRef.city
+From branches b, table (b.properties) p
+Where P.propertyRef.number_of_bedrooms >= 3 
+AND P.propertyRef.city = 'Jesmond'
+/
+
+REM Getting all male staff born after 1980 who live in Newcastle
+
+Select S.staffRef.Name, S.staffRef.Gender, S.staffRef.DOB, S.staffRef.city
+From branches b, table (b.staff) S
+Where S.staffRef.gender = 'M' AND
+S.staffRef.DOB >= '01-JAN-1980' AND
+S.staffRef.City = 'Newcastle'
+/

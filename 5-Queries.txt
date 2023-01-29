@@ -1,0 +1,33 @@
+REM Note that this query uses sysdate to find properties listed in the last 14 days, 
+REM it may well return no rows when its run in the future
+
+SELECT Type, Number_of_bedrooms, City, Date_listed
+FROM PROPERTY
+WHERE Type='semi-detached' AND
+Number_of_bedrooms >=3 AND
+City='Jesmond' AND
+Date_listed >= sysdate-14 AND 
+Available='Y' 
+
+
+REM formatting output 
+
+SET PAGESIZE 50000
+column description format a15
+column accommodation_details format a15
+
+SELECT p.PropertyID, p.Type, p.Description, p.Accommodation_details, p.Number_of_bedrooms, p.Date_listed, p.City, p.Street, m.Selling_price, t.Transaction_date
+FROM PROPERTY p
+INNER JOIN Mortgage m ON p.PropertyID = m.PropertyID
+INNER JOIN Transaction t ON p.PropertyID = t.PropertyID
+WHERE City IN ('Newcastle', 'Sunderland', 'Gateshead', 'Durham') AND
+Selling_price >=157000 AND Selling_price <=279000 AND
+(Extract(Year from t.transaction_date) = 2019 OR Extract(Year from t.transaction_date) = 2020)
+
+π TYPE, NUMBER_OF_BEDROOMS, CITY, DATE_LISTED (σ TYPE="SEMI-DETACHED" AND CITY = "Jesmond" AND DATE_LISTED >= SYSDATE-14 AND AVAILABLE = "Y" (PROPERTY))
+
+π p.PROPERTYID, p.TYPE, p.DESCRIPTION, p.ACCOMODATION_DETAILS, p.NUMBER_OF_BEDROOMS, p.DATE_LISTED, p.CITY, p.STREET, m.SELLING_PRICE, t.TRANSACTION_DATE
+ (ρ p PROPERTY ⋈ p.PROPERTYID = m.PROPERTYID
+  ρ m MORTGAGE ⋈ p.PROPERTYID = t.PROPERTYID
+   ρ t TRANSACTION)
+(σ CITY IN ('Newcastle', 'Sunderland', 'Gateshead', 'Durham') AND SELLING_PRICE>=157000 AND SELLING_PRICE<=279000 AND (EXTRACT(YEAR FROM t.TRANSACTION_DATE)=2019 OR EXTRACT(YEAR FROM t.TRANSACTION_DATE)=2020))

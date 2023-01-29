@@ -1,0 +1,139 @@
+REM Drop all tables in preperation for running/rerunning script 
+
+DROP TABLE PERSON CASCADE CONSTRAINTS;
+DROP TABLE CUSTOMER CASCADE CONSTRAINTS;
+DROP TABLE LANDLORD CASCADE CONSTRAINTS;
+DROP TABLE BUYER_TENANT CASCADE CONSTRAINTS;
+DROP TABLE STAFF CASCADE CONSTRAINTS;
+DROP TABLE ESTATE_AGENT CASCADE CONSTRAINTS;
+DROP TABLE LOCAL_BRANCH CASCADE CONSTRAINTS;
+DROP TABLE PROPERTY CASCADE CONSTRAINTS;
+DROP TABLE MORTGAGE CASCADE CONSTRAINTS;
+DROP TABLE RENTAL CASCADE CONSTRAINTS;
+DROP TABLE VIEWING CASCADE CONSTRAINTS;
+DROP TABLE TRANSACTION CASCADE CONSTRAINTS;
+
+CREATE TABLE PERSON (
+	ID Char(2) Constraint PKEY_PERSON Primary Key, 
+	Name Varchar(30) NOT NULL,
+	DOB Date NOT NULL, 
+	Gender Char(1) Constraint GENDERCHECK CHECK(Gender IN ('M', 'F', 'N')),
+	Contact Varchar(30) NOT NULL,
+	City Varchar(15),
+	Street Varchar(30));
+	
+CREATE TABLE CUSTOMER (
+	ID Char(2) Constraint PKEY_CUSTOMER Primary Key, 
+	Constraint FKEY_CUSTOMER_IS_PERSON
+		FOREIGN KEY (ID)
+		References PERSON(ID));
+
+CREATE TABLE LANDLORD (
+	ID Char(2) Constraint PKEY_LANDLORD Primary Key, 
+	Constraint FKEY_LANDLORD_IS_CUSTOMER
+		FOREIGN KEY (ID)
+		References CUSTOMER(ID));
+
+CREATE TABLE BUYER_TENANT (
+	ID Char(2) Constraint PKEY_BUYER_TENANT Primary Key, 
+	Constraint FKEY_BUYER_TENANT_IS_CUSTOMER
+		FOREIGN KEY (ID)
+		References CUSTOMER(ID));
+
+CREATE TABLE STAFF (
+	ID Char(2) Constraint PKEY_STAFF Primary Key,
+	Branch_code Char(3),
+	Constraint FKEY_STAFF_IS_PERSON 
+		FOREIGN KEY (ID)
+		References PERSON(ID));	
+
+CREATE TABLE ESTATE_AGENT (
+	Agent_name Varchar(30) Constraint PKEY_ESTATE Primary Key,
+	Contact Varchar(30) NOT NULL,
+	Headquarters Char(3),
+	Website Varchar(30),
+	City Varchar(15),
+	Street Varchar(30));
+	
+
+CREATE TABLE LOCAL_BRANCH (
+	Branch_code Char(3) Constraint PKEY_BRANCH Primary Key,
+	ManagerID Char(2) NOT NULL, Constraint FKEY_BRANCHMANAGER
+		FOREIGN KEY (ManagerID) 
+		References STAFF(ID), 
+	Estate_agent_name Varchar(30) NOT NULL, Constraint FKEY_OWNINGAGENT
+		FOREIGN KEY (Estate_agent_name)
+		References ESTATE_AGENT(Agent_name),
+	City Varchar(15),
+	Street Varchar(30),
+	Contact Varchar(15));
+
+REM Adding constraints that could not be added at time of creating table due to needing to reference tables that were not yet created
+
+ALTER TABLE STAFF ADD CONSTRAINT FKEY_STAFF_BRANCH FOREIGN KEY (Branch_code) References LOCAL_BRANCH(Branch_code);
+ALTER TABLE ESTATE_AGENT ADD CONSTRAINT FKEY_HEADQUARTERS_BRANCH FOREIGN KEY (Headquarters) References LOCAL_BRANCH(Branch_code);
+
+
+CREATE TABLE PROPERTY (
+	PropertyID Char(3) Constraint PKEY_PROPERTY Primary Key,
+	Description Varchar(140),
+	Available Char(1) NOT NULL, Constraint AVAILABLE_VALUE CHECK(Available IN('Y', 'N')),
+	Type Varchar(13) NOT NULL, Constraint PROPERTY_TYPE CHECK(Type IN (‘flat’, ‘terraced’, ‘semi-detached’, ‘detached’)),
+	Accommodation_details Varchar(140),
+	Number_of_bedrooms Number(2,0) Constraint SENSIBLE_ROOM_NO CHECK(Number_of_bedrooms > 0 AND Number_of_bedrooms < 100),
+	Date_listed Date NOT NULL,
+	City Varchar(15),
+	Street Varchar(30),
+	Branch_code Char(3) NOT NULL, Constraint FKEY_PROPERTY_BRANCH
+		FOREIGN KEY (Branch_code)
+		References LOCAL_BRANCH(Branch_code),
+	Landlord Char(2) NOT NULL, Constraint FKEY_PROPERTY_LANDLORD
+		FOREIGN KEY (Landlord)
+		References LANDLORD(ID));
+
+CREATE TABLE MORTGAGE (
+	PropertyID Char(3) Constraint PKEY_MORTGAGE Primary Key,
+	Stamp_duty Number Constraint POSITIVE_STAMP_DUTY CHECK(Stamp_duty >= 0),
+	Selling_price Number Constraint POSITIVE_SOLD_PRICE CHECK(Selling_price >= 0), 
+	Commission Number Constraint POSITIVE_MORTGAGE_COMMISSION CHECK(Commission >= 0),
+	CONSTRAINT FKEY_MORTGAGE_IS_PROPERTY
+		FOREIGN KEY (PropertyID)
+		References PROPERTY(PropertyID));
+
+CREATE TABLE RENTAL (
+	PropertyID Char(3) Constraint PKEY_RENTAL Primary Key,
+	Rent_per_month Number NOT NULL, Constraint POSITIVE_RENT CHECK(Rent_per_Month >= 0),
+	Deposit Number Constraint POSITIVE_DEPOSIT CHECK(Deposit >= 0), 
+	Commission Number Constraint POSITIVE_RENTAL_COMMISSION CHECK(Commission >= 0), 
+	Tenancy_starts Date NOT NULL,
+	Tenancy_ends Date NOT NULL, Constraint TENANCY_START_END CHECK(Tenancy_ends > Tenancy_starts),
+	CONSTRAINT FKEY_RENTAL_IS_PROPERTY
+		FOREIGN KEY (PropertyID)
+		References PROPERTY(PropertyID));
+
+CREATE TABLE VIEWING (
+	ViewingID Char(4) Constraint PKEY_VIEWING Primary Key,
+	Date_of_Viewing Date NOT NULL,
+	Time_of_viewing Number(4,0) NOT NULL, Constraint VALID_TIME CHECK(Time_of_viewing <= 2400), 
+	Customer_comments Varchar(140),
+	PropertyID Char(3) NOT NULL, Constraint FKEY_VIEWING_PROPERTY
+		FOREIGN KEY (PropertyID)
+		References PROPERTY(PropertyID), 
+	Branch_confirmed_by Char(3) NOT NULL, Constraint FKEY_BRANCH_VIEWING
+		FOREIGN KEY (Branch_confirmed_by)
+		References LOCAL_BRANCH(Branch_code),
+	Buyer_tenant_ID Char(2) NOT NULL, Constraint FKEY_BUYER_VIEWING
+		FOREIGN KEY (Buyer_tenant_ID)
+		References BUYER_TENANT(ID));
+
+CREATE TABLE TRANSACTION (
+	TransactionID Char(4) Constraint PKEY_TRANSACTION Primary Key,
+	Transaction_date Date NOT NULL, 
+	PropertyID Char(3) NOT NULL, Constraint FKEY_TRANSACTION_PROPERTY
+		FOREIGN KEY (PropertyID)
+		References PROPERTY(PropertyID),
+	Buyer_tenant Char(2) NOT NULL, Constraint FKEY_BUYER_TENANT_TRANSACTION
+		FOREIGN KEY (Buyer_tenant)
+		References BUYER_TENANT(ID));
+
+REM End of script 

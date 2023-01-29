@@ -1,0 +1,269 @@
+REM Inserting Buyers and Tenants, first into Person, and then into Customer/Buyer/Tenant to denote they are of these types
+
+INSERT INTO Person VALUES ('P1','Ronny Carpets','11-AUG-1998','M','0800001066','Newcastle','1 Northumberland');
+INSERT INTO Person VALUES ('P2','Matilda Randal','23-OCT-1988','F','Matilda2@gmail.com','Sunderland','3 Ponteland');
+INSERT INTO Person VALUES ('P3','Regina Sprat','12-NOV-1991','F','5550003232','Tynemouth','47 Chester');
+INSERT INTO Person VALUES ('P4','Lumpy Smint','07-DEC-1993','F','SmintyJow@hotmail.co.uk','Ashington','11 Argyle');
+INSERT INTO Person VALUES ('P5','Hot Rice','01-JAN-1972','N','07522243741','Newcastle','72 Clayton');
+INSERT INTO Person VALUES ('P6','Bill Decker','12-FEB-1982','M','07747011627','Newcastle','1 New Bridge');
+INSERT INTO Person VALUES ('P7','Jill Decker','28-MAR-1959','F','067637166274','Sunderland','3 Pandon');
+INSERT INTO Person VALUES ('P8','Brandon Crispy','11-APR-1968','M','CrispyBass@gmail.com','Gateshead','7 Ellison');
+INSERT INTO Person VALUES ('P9','Julia Tart','22-MAY-1975','F','07726177326','Edinburgh','4 Manors');
+INSERT INTO Person VALUES ('PA','Richard Stench','17-JUN-1983','M','076178266391','Tynemouth','33 Melbourne');
+
+INSERT INTO Customer VALUES ('P1');
+INSERT INTO Customer VALUES ('P2');
+INSERT INTO Customer VALUES ('P3');
+INSERT INTO Customer VALUES ('P4');
+INSERT INTO Customer VALUES ('P5');
+INSERT INTO Customer VALUES ('P6');
+INSERT INTO Customer VALUES ('P7');
+INSERT INTO Customer VALUES ('P8');
+INSERT INTO Customer VALUES ('P9');
+INSERT INTO Customer VALUES ('PA');
+
+INSERT INTO Buyer_tenant VALUES ('P1');
+INSERT INTO Buyer_tenant VALUES ('P2');
+INSERT INTO Buyer_tenant VALUES ('P3');
+INSERT INTO Buyer_tenant VALUES ('P4');
+INSERT INTO Buyer_tenant VALUES ('P5');
+INSERT INTO Buyer_tenant VALUES ('P6');
+INSERT INTO Buyer_tenant VALUES ('P7');
+INSERT INTO Buyer_tenant VALUES ('P8');
+INSERT INTO Buyer_tenant VALUES ('P9');
+INSERT INTO Buyer_tenant VALUES ('PA');
+	
+
+REM Inserting Landlords, first into Person, then Customer/Landlord to denote they are of these types
+
+INSERT INTO Person VALUES ('L1','Time Baker','09-AUG-1988','M','07251733274','Sunderland','2 Northumberland');
+INSERT INTO Person VALUES ('L2','Dingle Sprout','21-OCT-1978','F','07196555252','Tynemouth','4 Ponteland');
+INSERT INTO Person VALUES ('L3','Danial Ruth','11-NOV-1991','M','5550003232','Ashington','48 Chester');
+INSERT INTO Person VALUES ('L4','Thomas Train','18-DEC-1983','M','Train@gmail.com','Newcastle','12 Argyle');
+INSERT INTO Person VALUES ('L5','Angelica Pin','12-JAN-1972','F','Runty@gmail.co.uk','Newcastle','73 Clayton');
+INSERT INTO Person VALUES ('L6','Smithy Runt','11-FEB-1942','M','07212122721','Sunderland','2 New Bridge');
+INSERT INTO Person VALUES ('L7','Hockle Loud','23-MAR-1949','F','07726466273','Morpeth','4 Pandon');
+INSERT INTO Person VALUES ('L8','Art Hunth','12-APR-1958','M','98873722737','Gateshead','8 Ellison');
+INSERT INTO Person VALUES ('L9','Rington Tosser','23-MAY-1965','F','07366235161','Morpeth','5 Manors');
+INSERT INTO Person VALUES ('LA','Paul Thunk','18-JUN-1973','M','07781822839','Tynemouth','34 Melbourne');
+
+INSERT INTO Customer VALUES ('L1');
+INSERT INTO Customer VALUES ('L2');
+INSERT INTO Customer VALUES ('L3');
+INSERT INTO Customer VALUES ('L4');
+INSERT INTO Customer VALUES ('L5');
+INSERT INTO Customer VALUES ('L6');
+INSERT INTO Customer VALUES ('L7');
+INSERT INTO Customer VALUES ('L8');
+INSERT INTO Customer VALUES ('L9');
+INSERT INTO Customer VALUES ('LA');
+
+INSERT INTO Landlord VALUES ('L1');
+INSERT INTO Landlord VALUES ('L2');
+INSERT INTO Landlord VALUES ('L3');
+INSERT INTO Landlord VALUES ('L4');
+INSERT INTO Landlord VALUES ('L5');
+INSERT INTO Landlord VALUES ('L6');
+INSERT INTO Landlord VALUES ('L7');
+INSERT INTO Landlord VALUES ('L8');
+INSERT INTO Landlord VALUES ('L9');
+INSERT INTO Landlord VALUES ('LA');
+
+REM Inserting Staff, first into Person, and then into Staff
+
+INSERT INTO Person VALUES ('S1','Ronald Cant','09-AUG-1978','M','07162817236','Tynemouth','2 Holly');
+INSERT INTO Person VALUES ('S2','Jeremy Scout','21-OCT-1968','M','08174722534','Morpeth','4 Rose');
+INSERT INTO Person VALUES ('S3','Stath Eagle','11-NOV-1981','M','089172645253','Gateshead','48 Oak');
+INSERT INTO Person VALUES ('S4','Joan Scrump','18-DEC-1973','F','Jaon@gmail.com','Alnwick','12 Spruce');
+INSERT INTO Person VALUES ('S5','Angel Ruby','12-JAN-1962','N','Rubyy@gmail.co.uk','Ashinton','73 Birch');
+INSERT INTO Person VALUES ('S6','Emily Butterfield','11-FEB-1932','F','07212123421','Amble','2 Rowan');
+INSERT INTO Person VALUES ('S7','Strawberry Runner','23-MAR-1939','F','07626466273','North Seaton','4 Ash');
+INSERT INTO Person VALUES ('S8','John Fielding','12-APR-1948','M','07873722737','Newbiggin','8 Pine');
+INSERT INTO Person VALUES ('S9','Ellie Joel','23-MAY-1955','F','07466235161','Cambois','5 Evergreen');
+INSERT INTO Person VALUES ('SA','Tom Smith','18-JUN-1963','M','07581822839','Newcastle','34 Birch');
+INSERT INTO Person VALUES ('SB','Jack Ryan','12-FEB-1963','M','07481822839','Newcastle','37 Birch');
+INSERT INTO Person VALUES ('SC','Grace Hopper','19-MAR-1972','F','07711728912','Newcastle','99 Ritchie');
+INSERT INTO Person VALUES ('SD','Donald Knuth','20-JUL-1917','M','07811726152','Newcastle','34 Page');
+INSERT INTO Person VALUES ('SE','Ada Lovelace','21-AUG-1991','F','078111726151','Newcastle','71 Brin');
+INSERT INTO Person VALUES ('SF','James Gosling','22-SEP-1955','M','071288727626','Newcastle','88 Liskov');
+
+REM Branch code not set here as local branches have not been inserted into DB yet 
+
+INSERT INTO STAFF (ID) VALUES ('S1');
+INSERT INTO STAFF (ID) VALUES ('S2');
+INSERT INTO STAFF (ID) VALUES ('S3');
+INSERT INTO STAFF (ID) VALUES ('S4');
+INSERT INTO STAFF (ID) VALUES ('S5');
+INSERT INTO STAFF (ID) VALUES ('S6');
+INSERT INTO STAFF (ID) VALUES ('S7');
+INSERT INTO STAFF (ID) VALUES ('S8');
+INSERT INTO STAFF (ID) VALUES ('S9');
+INSERT INTO STAFF (ID) VALUES ('SA');
+INSERT INTO STAFF (ID) VALUES ('SB');
+INSERT INTO STAFF (ID) VALUES ('SC');
+INSERT INTO STAFF (ID) VALUES ('SD');
+INSERT INTO STAFF (ID) VALUES ('SE');
+INSERT INTO STAFF (ID) VALUES ('SF');
+
+REM Inserting Estate Agents, without headquarters value as this this will be a reference to a local branch, which has not been added to DB yet
+
+INSERT INTO ESTATE_AGENT (Agent_name, Contact, Website, City, Street) VALUES ('Michael and Eagle Lettings', 'lettings@michaeleagle.co.uk', 'michaeleagle.co.uk', 'Newcastle', '1 Capital Road');
+INSERT INTO ESTATE_AGENT (Agent_name, Contact, Website, City, Street) VALUES ('Johnsons Houses', 'contact@johnsons.co.uk', 'johnsonshouses.co.uk', 'Gateshead', '2 Three Lane');
+INSERT INTO ESTATE_AGENT (Agent_name, Contact, Website, City, Street) VALUES ('Lettings it Be', 'admin@lettingsitbe.com', 'lettingsitbe.co.uk', 'Alnwick', '5 Finance Terrace');
+INSERT INTO ESTATE_AGENT (Agent_name, Contact, Website, City, Street) VALUES ('Good Houses inc', 'john@goodhouses.net', 'goodhouses.co.uk', 'Newcastle', '33 Haven Way');
+INSERT INTO ESTATE_AGENT (Agent_name, Contact, Website, City, Street) VALUES ('House Market', 'enquire@housemarket', 'housemarket.co.uk', 'Sunderland', '17 Sprout Street');
+
+REM Inserting Local Branches
+
+INSERT INTO LOCAL_BRANCH VALUES ('032', 'S1', 'Michael and Eagle Lettings', 'Newcastle', '2 Mildew Way', '071212177321');
+INSERT INTO LOCAL_BRANCH VALUES ('031', 'S2', 'Michael and Eagle Lettings', 'Ashington', '3 Crawford Street', '07611726152');
+INSERT INTO LOCAL_BRANCH VALUES ('042', 'S3', 'Johnsons Houses', 'Gateshead', '4 Lovelace Avenue', '07988172654');
+INSERT INTO LOCAL_BRANCH VALUES ('041', 'S4', 'Johnsons Houses', 'Gateshead', '5 Babbage Terrace', '071229765434');
+INSERT INTO LOCAL_BRANCH VALUES ('052', 'S5', 'Lettings it Be', 'Alnwick', '6 Boolean Way', '078448467632');
+INSERT INTO LOCAL_BRANCH VALUES ('051', 'S6', 'Lettings it Be', 'Tynemouth', '7 Turing Street', '07911829091');
+INSERT INTO LOCAL_BRANCH VALUES ('062', 'S7', 'Good Houses inc', 'Jesmond', '8 Pascal Avenue', '0711727631');
+INSERT INTO LOCAL_BRANCH VALUES ('061', 'S8', 'Good Houses inc', 'Newcastle', '9 Berners Close', '07888726541');
+INSERT INTO LOCAL_BRANCH VALUES ('072', 'S9', 'House Market', 'Sunderland', '10 Wozniak Street', '07522243711');
+INSERT INTO LOCAL_BRANCH VALUES ('071', 'SA', 'House Market', 'Sunderland', '11 Gates Lane', '0747022575');
+
+REM Assigning estate agent headquarters 
+
+UPDATE ESTATE_AGENT SET headquarters = '032' WHERE Agent_name = 'Michael and Eagle Lettings';
+UPDATE ESTATE_AGENT SET headquarters = '042' WHERE Agent_name = 'Johnsons Houses';
+UPDATE ESTATE_AGENT SET headquarters = '052' WHERE Agent_name = 'Lettings it Be';
+UPDATE ESTATE_AGENT SET headquarters = '062' WHERE Agent_name = 'Good Houses inc';
+UPDATE ESTATE_AGENT SET headquarters = '072' WHERE Agent_name = 'House Market';
+
+REM Assigning staff to local branches 
+
+UPDATE STAFF SET Branch_code = '032' WHERE ID = 'S1';
+UPDATE STAFF SET Branch_code = '031' WHERE ID = 'S2';
+UPDATE STAFF SET Branch_code = '042' WHERE ID = 'S3';
+UPDATE STAFF SET Branch_code = '041' WHERE ID = 'S4';
+UPDATE STAFF SET Branch_code = '052' WHERE ID = 'S5';
+UPDATE STAFF SET Branch_code = '051' WHERE ID = 'S6';
+UPDATE STAFF SET Branch_code = '062' WHERE ID = 'S7';
+UPDATE STAFF SET Branch_code = '061' WHERE ID = 'S8';
+UPDATE STAFF SET Branch_code = '072' WHERE ID = 'S9';
+UPDATE STAFF SET Branch_code = '071' WHERE ID = 'SA';
+UPDATE STAFF SET Branch_code = '032' WHERE ID = 'SB';
+UPDATE STAFF SET Branch_code = '041' WHERE ID = 'SC';
+UPDATE STAFF SET Branch_code = '052' WHERE ID = 'SD';
+UPDATE STAFF SET Branch_code = '061' WHERE ID = 'SE';
+UPDATE STAFF SET Branch_code = '072' WHERE ID = 'SF';
+
+REM Inserting rental properties 
+
+INSERT INTO PROPERTY VALUES ('001', 'Lovely House', 'Y', 'flat', 'Fully furnished flat', '1', '02-JAN-2018', 'Newcastle', '21 Buteland', '032', 'L1');
+INSERT INTO PROPERTY VALUES ('002', 'Nice place to live', 'Y', 'terraced', 'Unfurnished dwelling', '2', '03-FEB-2019', 'Jesmond', '20 Widow', '031', 'L2');
+INSERT INTO PROPERTY VALUES ('003', 'Good for families', 'Y', 'flat', 'Fully furnished flat', '3', '04-MAR-2020', 'Gateshead', '19 Recluse', '042', 'L3');
+INSERT INTO PROPERTY VALUES ('004', 'Large living area', 'Y', 'semi-detached', 'Shared garden', '4', '05-APR-2018', 'Sunderland', '18 Bird', '041', 'L4');
+INSERT INTO PROPERTY VALUES ('005', 'Nice garden', 'N', 'flat', 'Fully furnished flat', '1', '06-JUN-2019', 'Morpeth', '17 Hornet', '052', 'L5');
+INSERT INTO PROPERTY VALUES ('006', 'Plenty of storage', 'Y', 'terraced', 'Unfurnished dwelling', '2', '07-JUL-2020', 'Alnwick', '16 Marten', '051', 'L6');
+INSERT INTO PROPERTY VALUES ('007', 'Need renovation', 'Y', 'semi-detached', 'Shared garden', '3', '08-AUG-2018', 'Newcastle', '15 Mouse', '062', 'L7');
+INSERT INTO PROPERTY VALUES ('008', 'Lots of natural light', 'Y', 'terraced', 'Unfurnished dwelling', '4', '09-SEP-2019', 'Jesmond', '14 Harvest', '061', 'L8');
+INSERT INTO PROPERTY VALUES ('009', 'Pet friendly', 'N', 'flat', 'Fully furnished flat', '1', '10-OCT-2020', 'Gateshead', '13 Autumn', '072', 'L9');
+INSERT INTO PROPERTY VALUES ('010', 'No pets', 'Y', 'flat', 'Fully furnished flat', '2', '11-NOV-2018', 'Sunderland', '12 Pumpkin', '071', 'LA');
+INSERT INTO PROPERTY VALUES ('011', 'Could use some paint', 'Y', 'flat', 'Fully furnished flat', '3', '12-DEC-2019', 'Alnwick', '11 Fear', '032', 'L1');
+INSERT INTO PROPERTY VALUES ('012', 'Solar panels installed', 'Y', 'semi-detached', 'Shared garden', '4', '13-JAN-2020', 'Morpeth', '10 Elm', '031', 'L2');
+INSERT INTO PROPERTY VALUES ('013', 'Modern heating system', 'N', 'detached', 'Own private garden', '1', '14-FEB-2018', 'Ashington', '9 Rose', '042', 'L3');
+INSERT INTO PROPERTY VALUES ('014', 'No pets', 'Y', 'flat', 'Fully furnished flat', '2', '15-MAR-2019', 'Newcastle', '8 Budding', '041', 'L4');
+INSERT INTO PROPERTY VALUES ('015', 'Great period features', 'Y', 'terraced', 'Unfurnished dwelling', '4', '16-APR-2020', 'Newcastle', '7 Lily', '052', 'L5');
+INSERT INTO PROPERTY VALUES ('016', 'Could use a restyle', 'N', 'flat', 'Fully furnished flat', '1', '17-MAY-2018', 'Gateshead', '6 Crow', '051', 'L6');
+INSERT INTO PROPERTY VALUES ('017', 'Open plan living area', 'N', 'semi-detached', 'Shared garden', '2', '18-JUN-2020', 'Gateshead', '5 Garnet', '062', 'L7');
+INSERT INTO PROPERTY VALUES ('018', 'Lovely House', 'Y', 'flat', 'Fully furnished flat', '3', '19-JUL-2019', 'Newcastle', '4 Opal', '061', 'L8');
+INSERT INTO PROPERTY VALUES ('019', 'Perfect for families', 'Y', 'flat', 'Fully furnished flat', '4', '20-AUG-2020', 'Sunderland', '3 Onyx', '072', 'L9');
+INSERT INTO PROPERTY VALUES ('020', 'Recently renovated', 'N', 'detached', 'Own private garden', '3', '21-SEP-2020', 'Newcastle', '2 Ruby', '071', 'LA');
+
+INSERT INTO RENTAL VALUES ('001', '420', '210', '300', '01-JAN-2021', '01-JAN-2022');
+INSERT INTO RENTAL VALUES ('002', '330', '220', '400', '02-FEB-2021', '02-FEB-2022');
+INSERT INTO RENTAL VALUES ('003', '540', '230', '500', '03-MAR-2021', '03-MAR-2022');
+INSERT INTO RENTAL VALUES ('004', '450', '240', '300', '04-APR-2021', '04-APR-2022');
+INSERT INTO RENTAL VALUES ('005', '360', '250', '400', '05-MAY-2021', '05-MAY-2022');
+INSERT INTO RENTAL VALUES ('006', '570', '260', '500', '06-JUN-2021', '06-JUN-2022');
+INSERT INTO RENTAL VALUES ('007', '480', '270', '300', '07-JUL-2021', '07-JUL-2022');
+INSERT INTO RENTAL VALUES ('008', '380', '280', '400', '08-AUG-2021', '08-AUG-2022');
+INSERT INTO RENTAL VALUES ('009', '590', '290', '500', '09-SEP-2021', '09-SEP-2022');
+INSERT INTO RENTAL VALUES ('010', '400', '210', '300', '01-OCT-2021', '01-NOV-2022');
+INSERT INTO RENTAL VALUES ('011', '310', '220', '400', '02-NOV-2021', '02-DEC-2022');
+INSERT INTO RENTAL VALUES ('012', '520', '230', '500', '03-DEC-2021', '03-JAN-2022');
+INSERT INTO RENTAL VALUES ('013', '430', '240', '300', '04-JAN-2021', '04-FEB-2022');
+INSERT INTO RENTAL VALUES ('014', '340', '250', '400', '05-FEB-2021', '05-MAR-2022');
+INSERT INTO RENTAL VALUES ('015', '550', '260', '500', '06-MAR-2021', '06-APR-2022');
+INSERT INTO RENTAL VALUES ('016', '460', '270', '300', '07-APR-2021', '07-MAY-2022');
+INSERT INTO RENTAL VALUES ('017', '370', '280', '400', '08-MAY-2021', '08-JUN-2022');
+INSERT INTO RENTAL VALUES ('018', '580', '290', '500', '09-JUN-2021', '09-JUL-2022');
+INSERT INTO RENTAL VALUES ('019', '390', '220', '300', '01-JUL-2021', '01-AUG-2022');
+INSERT INTO RENTAL VALUES ('020', '450', '210', '400', '02-AUG-2021', '02-SEP-2022');
+
+REM Inserting properties for sale 
+
+INSERT INTO PROPERTY VALUES ('021', 'Lovely House', 'Y', 'flat', 'Fully furnished flat', '1', '02-JAN-2018', 'Newcastle', '21 Buteland', '032', 'L1');
+INSERT INTO PROPERTY VALUES ('022', 'Nice place to live', 'Y', 'semi-detached', 'Unfurnished dwelling', '3', '30-NOV-2021', 'Jesmond', '20 Widow', '031', 'L2');
+INSERT INTO PROPERTY VALUES ('023', 'Good for families', 'Y', 'flat', 'Fully furnished flat', '3', '04-MAR-2020', 'Gateshead', '19 Recluse', '042', 'L3');
+INSERT INTO PROPERTY VALUES ('024', 'Large living area', 'Y', 'semi-detached', 'Shared garden', '4', '05-APR-2018', 'Sunderland', '18 Bird', '041', 'L4');
+INSERT INTO PROPERTY VALUES ('025', 'Nice garden', 'N', 'flat', 'Fully furnished flat', '1', '06-JUN-2019', 'Durham', '17 Hornet', '052', 'L5');
+INSERT INTO PROPERTY VALUES ('026', 'Plenty of storage', 'Y', 'terraced', 'Unfurnished dwelling', '2', '07-JUL-2020', 'Alnwick', '16 Marten', '051', 'L6');
+INSERT INTO PROPERTY VALUES ('027', 'Need renovation', 'Y', 'semi-detached', 'Shared garden', '3', '08-AUG-2018', 'Newcastle', '15 Mouse', '062', 'L7');
+INSERT INTO PROPERTY VALUES ('028', 'Lots of natural light', 'Y', 'semi-detached', 'Unfurnished dwelling', '4', '25-NOV-2021', 'Jesmond', '14 Harvest', '061', 'L8');
+INSERT INTO PROPERTY VALUES ('029', 'Pet friendly', 'N', 'flat', 'Fully furnished flat', '1', '10-OCT-2020', 'Durham', '13 Autumn', '072', 'L9');
+INSERT INTO PROPERTY VALUES ('030', 'No pets', 'Y', 'flat', 'Fully furnished flat', '2', '11-NOV-2018', 'Sunderland', '12 Pumpkin', '071', 'LA');
+INSERT INTO PROPERTY VALUES ('031', 'Could use some paint', 'Y', 'flat', 'Fully furnished flat', '3', '12-DEC-2019', 'Durham', '11 Fear', '032', 'L1');
+INSERT INTO PROPERTY VALUES ('032', 'Solar panels installed', 'Y', 'semi-detached', 'Shared garden', '4', '13-JAN-2020', 'Jesmond', '10 Elm', '031', 'L2');
+INSERT INTO PROPERTY VALUES ('033', 'Modern heating system', 'N', 'detached', 'Own private garden', '1', '14-FEB-2018', 'Jesmond', '9 Rose', '042', 'L3');
+INSERT INTO PROPERTY VALUES ('034', 'No pets', 'Y', 'flat', 'Fully furnished flat', '2', '15-MAR-2019', 'Newcastle', '8 Budding', '041', 'L4');
+INSERT INTO PROPERTY VALUES ('035', 'Great period features', 'Y', 'terraced', 'Unfurnished dwelling', '4', '16-APR-2020', 'Newcastle', '7 Lily', '052', 'L5');
+INSERT INTO PROPERTY VALUES ('036', 'Could use a restyle', 'N', 'flat', 'Fully furnished flat', '1', '17-MAY-2018', 'Gateshead', '6 Crow', '051', 'L6');
+INSERT INTO PROPERTY VALUES ('037', 'Open plan living area', 'N', 'semi-detached', 'Shared garden', '2', '18-JUN-2020', 'Gateshead', '5 Garnet', '062', 'L7');
+INSERT INTO PROPERTY VALUES ('038', 'Lovely House', 'Y', 'flat', 'Fully furnished flat', '3', '19-JUL-2019', 'Newcastle', '4 Opal', '061', 'L8');
+INSERT INTO PROPERTY VALUES ('039', 'Perfect for families', 'Y', 'flat', 'Fully furnished flat', '4', '20-AUG-2020', 'Sunderland', '3 Onyx', '072', 'L9');
+INSERT INTO PROPERTY VALUES ('040', 'Recently renovated', 'N', 'detached', 'Own private garden', '3', '21-SEP-2020', 'Newcastle', '2 Ruby', '071', 'LA');
+
+
+INSERT INTO MORTGAGE VALUES ('021', '1000', '250000', '2500');
+INSERT INTO MORTGAGE VALUES ('022', '2000', '350000', '3500');
+INSERT INTO MORTGAGE VALUES ('023', '3000', '150000', '1500');
+INSERT INTO MORTGAGE VALUES ('024', '4000', '250000', '2500');
+INSERT INTO MORTGAGE VALUES ('025', '1000', '350000', '3500');
+INSERT INTO MORTGAGE VALUES ('026', '2000', '150000', '1500');
+INSERT INTO MORTGAGE VALUES ('027', '3000', '250000', '2500');
+INSERT INTO MORTGAGE VALUES ('028', '4000', '350000', '3500');
+INSERT INTO MORTGAGE VALUES ('029', '1000', '150000', '1500');
+INSERT INTO MORTGAGE VALUES ('030', '2000', '250000', '2500');
+INSERT INTO MORTGAGE VALUES ('031', '3000', '350000', '3500');
+INSERT INTO MORTGAGE VALUES ('032', '4000', '150000', '1500');
+INSERT INTO MORTGAGE VALUES ('033', '1000', '250000', '2500');
+INSERT INTO MORTGAGE VALUES ('034', '2000', '350000', '3500');
+INSERT INTO MORTGAGE VALUES ('035', '3000', '150000', '1500');
+INSERT INTO MORTGAGE VALUES ('036', '4000', '250000', '2500');
+INSERT INTO MORTGAGE VALUES ('037', '1000', '350000', '3500');
+INSERT INTO MORTGAGE VALUES ('038', '2000', '150000', '1500');
+INSERT INTO MORTGAGE VALUES ('039', '3000', '250000', '2500');
+INSERT INTO MORTGAGE VALUES ('040', '4000', '350000', '3500');
+
+REM Inserting viewings 
+
+INSERT INTO VIEWING VALUES ('0001', '01-JAN-2020', '1030', 'They might take it', '021', '032', 'P1');
+INSERT INTO VIEWING VALUES ('0002', '02-JAN-2020', '1100', 'Not interested', '011', '042', 'P2');
+INSERT INTO VIEWING VALUES ('0003', '03-JAN-2020', '0915', 'Would consider at a lower price', '031', '052', 'P3');
+INSERT INTO VIEWING VALUES ('0004', '04-JAN-2020', '1620', 'Too small for family', '021', '042', 'P4');
+INSERT INTO VIEWING VALUES ('0005', '05-JAN-2020', '1030', 'Too mcuh work needed', '022', '052', 'P5');
+INSERT INTO VIEWING VALUES ('0006', '06-JAN-2020', '0630', 'Not to taste', '023', '062', 'P6');
+INSERT INTO VIEWING VALUES ('0007', '07-JAN-2020', '0710', 'Pleased with space', '024', '072', 'P7');
+INSERT INTO VIEWING VALUES ('0008', '08-JAN-2020', '0820', 'Likes the garden', '025', '032', 'P8');
+INSERT INTO VIEWING VALUES ('0009', '09-JAN-2020', '0940', 'Curious about parking', '026', '042', 'P9');
+INSERT INTO VIEWING VALUES ('0010', '10-JAN-2020', '1045', 'They like it', '027', '052', 'PA');
+
+REM Inserting transactions
+
+INSERT INTO TRANSACTION VALUES ('0001', '01-JAN-2020', '021', 'P1');
+INSERT INTO TRANSACTION VALUES ('0002', '02-JAN-2020', '022', 'P2');
+INSERT INTO TRANSACTION VALUES ('0003', '03-JAN-2020', '023', 'P3');
+INSERT INTO TRANSACTION VALUES ('0004', '04-JAN-2020', '024', 'P4');
+INSERT INTO TRANSACTION VALUES ('0005', '05-JAN-2020', '025', 'P5');
+INSERT INTO TRANSACTION VALUES ('0006', '06-JAN-2020', '016', 'P6');
+INSERT INTO TRANSACTION VALUES ('0007', '07-JAN-2020', '017', 'P7');
+INSERT INTO TRANSACTION VALUES ('0008', '08-JAN-2019', '018', 'P8');
+INSERT INTO TRANSACTION VALUES ('0009', '09-JAN-2020', '019', 'P9');
+INSERT INTO TRANSACTION VALUES ('0010', '10-JAN-2020', '010', 'PA');
+
